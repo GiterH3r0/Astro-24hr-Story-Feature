@@ -1,4 +1,7 @@
 ---
+import Footer from "../components/Footer.astro";
+import Hamburger from "../components/Hamburger.astro";
+import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 const pageTitle = "24-hours story feature with Astro";
@@ -6,7 +9,7 @@ const pageTitle = "24-hours story feature with Astro";
 const identity = {
   firstName: "Dario",
   country: "Cuba",
-  occupation: "Escritor técnico",
+  occupation: "Senior Front-End Developer",
   hobbies: ["fotografia", "observación de aves", "peñarol"],
 };
 
@@ -46,9 +49,8 @@ const textCase = "uppercase";
 </head>
 
 <body>
-  <a href="/">Home</a>
-  <a href="/about/">About</a>
-  <a href="/blog/">Blog</a>
+  <Hamburger />
+  <Header />
   <h1>{pageTitle}</h1>
   <h1>About this site</h1>
   <h2>...</h2>
@@ -86,4 +88,8 @@ const textCase = "uppercase";
       <p>Mi objetivo no son 3 días.</p>
     )
   }
+  <Footer />
+  <script>
+    import "../scripts/menu";
+  </script>
 </body>
