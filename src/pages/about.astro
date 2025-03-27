@@ -1,7 +1,5 @@
 ---
-import Footer from "../components/Footer.astro";
-import Hamburger from "../components/Hamburger.astro";
-import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 
 const pageTitle = "24-hours story feature with Astro";
@@ -36,10 +34,6 @@ const textCase = "uppercase";
   <meta name="viewport" content="width=device-width" />
   <title>{pageTitle}</title>
   <style define:vars={{ skillColor, fontWeight, textCase }}>
-    h1 {
-      color: purple;
-      font-size: 4rem;
-    }
     .skill {
       color: var(--skillColor);
       font-weight: var(--fontWeight);
@@ -49,47 +43,42 @@ const textCase = "uppercase";
 </head>
 
 <body>
-  <Hamburger />
-  <Header />
-  <h1>{pageTitle}</h1>
-  <h1>About this site</h1>
-  <h2>...</h2>
+  <Layout pageTitle={pageTitle}>
+    <h1>About this site</h1>
+    <h2>...</h2>
 
-  <p>Web site build with Astro, it mocks a social network story feature</p>
+    <p>Web site build with Astro, it mocks a social network story feature</p>
 
-  <p>This web site will be upgraded eventually</p>
+    <p>This web site will be upgraded eventually</p>
 
-  <p>He aquí algunos datos sobre mí:</p>
-  <ul>
-    <li>Me llamo {identity.firstName}.</li>
-    <li>Vivo en {identity.country} y trabajo como {identity.occupation}.</li>
+    <p>He aquí algunos datos sobre mí:</p>
+    <ul>
+      <li>Me llamo {identity.firstName}.</li>
+      <li>Vivo en {identity.country} y trabajo como {identity.occupation}.</li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
+            {identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>Mis habilidades son:</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    {happy && <p>¡Estoy feliz de aprender Astro!</p>}
+
+    {finished && <p>¡He terminado este tutorial!</p>}
+
     {
-      identity.hobbies.length >= 2 && (
-        <li>
-          Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
-          {identity.hobbies[1]}
-        </li>
+      goal === 3 ? (
+        <p>Mi objetivo es terminar en 3 días.</p>
+      ) : (
+        <p>Mi objetivo no son 3 días.</p>
       )
     }
-  </ul>
-  <p>Mis habilidades son:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
-
-  {happy && <p>¡Estoy feliz de aprender Astro!</p>}
-
-  {finished && <p>¡He terminado este tutorial!</p>}
-
-  {
-    goal === 3 ? (
-      <p>Mi objetivo es terminar en 3 días.</p>
-    ) : (
-      <p>Mi objetivo no son 3 días.</p>
-    )
-  }
-  <Footer />
-  <script>
-    import "../scripts/menu";
-  </script>
+  </Layout>
 </body>
